@@ -1,0 +1,6 @@
+<div class="fields">
+  <div class="field">
+    <%= f.select(:seat_id, @vacantseats,{:prompt => "選択してください"}, {class: "seat_select_button"}) %>
+    <%= link_to_remove_fields "削除", f %>
+  </div>
+</div>

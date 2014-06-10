@@ -1,0 +1,9 @@
+<% @page_title = "管理ページトップ" %>
+<ul>
+<li><%= link_to "ユーザ一覧", admin_users_path %></li>
+<li><%= link_to "お知らせ管理", admin_articles_path %></li>
+<li><%= link_to "コース管理", admin_courses_path %></li>
+<li><%= link_to "予約情報閲覧", admin_reservations_path %></li>
+</ul>
+<h2>本日の予約一覧</h2>
+<%= render "admin/reservations/index" %>

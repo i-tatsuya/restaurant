@@ -1,0 +1,55 @@
+<%= render "shared/errors", obj: @reservation %>
+
+<table class="">
+  <tr>
+    <script>
+        //datepickerを仕込む処理
+        $(function(){
+          $("#reservation_date").datepicker();
+          $('#reservation_date').datepicker("option", "dateFormat", 'yy-mm-dd' );
+        });
+    </script>
+    <th><%= form.label :date %></th>
+    <td><%= form.text_field :date %></td>
+  </tr>
+  <tr>
+    <th>予約時間</th>
+    <td>
+      <%= form.radio_button :time, 0 %>
+      <%= form.label :time_0, "ランチ" %>
+      <%= form.radio_button :time, 1 %>
+      <%= form.label :time_1, "ディナー" %>
+    </td>
+  </tr>
+  <tr>
+    <th><%= form.label :persons %></th>
+    <td>
+      <%
+        personsArr = [ ]
+        51.times do |i|
+          personsArr.push(i+1)
+        end
+      %>
+      <%= form.select :persons, personsArr %>名様
+    </td>
+    </tr>
+  <tr>
+    <th><%= form.label :course_name %></th>
+    <td>
+      <%= form.select :course_id, @courses.map{|t| ["#{t.course_name} #{t.price}円", t.id]},{:prompt => "選択してください"} %>
+    </td>
+  </tr>
+  <tr>
+    <th><%= form.label :memorial_name %></th>
+    <td>
+      <%= form.select :memorial_id, @memorial.map{|t| ["#{t.memorial_name}",t.id]},{:prompt => "記念日でしたらお選びください"} %>
+    </td>
+  </tr>
+  <tr>
+    <th><%= form.label :message %></th>
+    <td>
+     <span>アレルギーや別途お知らせしたいことがあればご記入ください。</span>
+     <%= form.text_area :message, cols: 40, rows: 3 %>
+    </td>
+  </tr>
+</table>

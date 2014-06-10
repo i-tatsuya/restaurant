@@ -1,0 +1,73 @@
+<% @page_title = "予約情報確認"%>
+<h1><%= @page_title %></h1>
+
+<%= form_for @reservation do |form| %>
+  <table>
+       <%= form.hidden_field :user_id, :value => @current_user.id %>
+    <tr>
+      <th><%= form.label :date %></th>
+      <td>
+       <%= @reservation.date %>
+       <%= form.hidden_field :date, :value => @reservation.date %>
+      </td>
+    </tr>
+    <tr>
+      <th><%= form.label :time %></th>
+      <td>
+       <%= @reservation.time == 0 ? "ランチ" : "ディナー" %>
+       <%= form.hidden_field :time, :value => @reservation.time %>
+      </td>
+    </tr>
+    <tr>
+      <th><%= form.label :persons %></th>
+      <td>
+       <%= @reservation.persons %>
+       <%= form.hidden_field :persons, :value => @reservation.persons %>
+      </td>
+    </tr>
+    <tr>
+      <th><%= form.label :course_name %></th>
+      <td>
+       <%= @reservation.course.course_name %>
+       <%= form.hidden_field :course_id, :value => @reservation.course_id %>
+      </td>
+    </tr>
+    <% if @reservation.memorial_id != nil %>
+    <tr>
+      <th>記念日設定</th>
+      <td>
+       <%= @reservation.memorial.memorial_name %>
+       <%= form.hidden_field :memorial_id, :value => @reservation.memorial_id %>
+      </td>
+    </tr>
+    <% end %>
+    <% if @reservation.service_id != nil %>
+    <tr>
+      <th><%= form.label :service_name %></th>
+      <td>
+       <%= @reservation.service.service_name %>
+       <%= form.hidden_field :service_id, :value => @reservation.service_id %>
+      </td>
+    </tr>
+    <% end %>
+    <% idx = 0 %>
+    <%= form.fields_for :selected_seats, @reservation.selected_seats do |f| %>
+    <tr>
+      <th>席番号</th>
+      <td>
+        <%= @reservation.selected_seats[idx].seat_id %>
+        <%= f.hidden_field :seat_id, :value => @reservation.selected_seats[idx].seat_id %>
+      </td>
+    </tr>
+      <% idx+=1 %>
+    <% end %>
+    <tr>
+      <th><%= form.label :message %></th>
+      <td>
+       <%= @reservation.message %>
+       <%= form.hidden_field :message, :value => @reservation.message %>
+      </td>
+    </tr>
+  </table>
+<%= form.submit "予約を確定する"%>
+<% end %>

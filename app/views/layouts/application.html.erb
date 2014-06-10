@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title><%= page_title %></title>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application" %>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div id="container">
+      <div id="header">
+  <%= render "shared/header" %>
+      </div>
+      <div id="content">
+      <% if flash.notice %>
+      <p class="notice"><%= flash.notice %></p>
+      <% end %>
+  <%= yield %>
+      </div>
+      <div id="footer">
+  <%= render "shared/footer" %>
+      </div>
+    </div>
+  </body>
+</html>

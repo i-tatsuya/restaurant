@@ -1,0 +1,33 @@
+<% @page_title = "ユーザー一覧" %>
+<h1><%= @page_title %></h1>
+<%= form_tag :search_admin_users, method: :get do %>
+<p><%= text_field_tag "q", params[:q] %>
+<%= submit_tag "検索" %></p>
+<% end %>
+
+<% if @users.present? %>
+<table class="list">
+  <tr>
+    <th>名前</th>
+    <th>TEL</th>
+    <th>E−Mail</th>
+    <th>操作</th>
+  </tr>
+  <% @users.each do |user| %>
+  <tr>
+    <td><%= link_to user.user_name, [:admin, user] %></td>
+    <td><%= user.phone_number %></td>
+    <td><%= user.mail_address %></td>
+    <td>
+      <%= link_to "削除", [:admin, user], method: :delete,
+            confirm: "本当に削除しますか?" %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<%= will_paginate @users %>
+
+<% else %>
+<p>会員情報がありません。</p>
+<% end %>
+

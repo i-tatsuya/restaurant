@@ -1,0 +1,47 @@
+<% @page_title = "予約詳細ページ" %>
+<h1><%= @page_title %></h1>
+
+<p><%= link_to "予約削除", @reservation, method: :delete, confirm: "本当に削除しますか?" %></p>
+
+
+<table class="attr">
+  <tr>
+    <th>日付</th>
+    <td><%=  @reservation.date %></td>
+  </tr>
+  <tr>
+    <th>お時間</th>
+    <td><%= @reservation.time == 0 ? "ランチ" : "ディナー" %></td>
+  </tr>
+  <tr>
+    <th>人数</th>
+    <td><%= @reservation.persons %></td>
+  </tr>
+  <% @reservation.seats.each do |val| %>
+  <tr>
+    <th>お席番号</th>
+    <td><%= val.id %></td>
+  <% end %>
+  <% if @reservation.course %>
+  <tr>
+    <th>コース</th>
+    <td><%= @reservation.course.course_name %></td>
+  </tr>
+  <% end %>
+  <% if @reservation.memorial %>
+  <tr>
+    <th>記念日設定</th>
+    <td><%= @reservation.memorial.memorial_name %></td>
+  </tr>
+  <% end %>
+  <% if @reservation.service %>
+  <tr>
+    <th>記念日特別サービス</th>
+    <td><%= @reservation.service.service_name %></td>
+  </tr>
+  <% end %>
+  <tr>
+    <th>備考</th>
+    <td><%= @reservation.message %></td>
+  </tr>
+</table>

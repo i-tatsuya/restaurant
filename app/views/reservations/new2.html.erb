@@ -1,0 +1,88 @@
+<% @page_title = "予約情報入力" %>
+<h1><%= @page_title %></h1>
+<canvas id="map" width="780" height="400"></canvas>
+<script>
+//restaurantマップを表示するためのオブジェクト
+function RestaurantMapView(){};
+RestaurantMapView.prototype.drawBaseMap = function(fn){
+  (function() {
+    var canvas = document.getElementById('map');
+    var context = canvas.getContext('2d');
+    var image = new Image();
+    image.onload = function(){
+      context.drawImage(image, 0, 0);
+      fn();
+    };
+    image.src = "/assets/base.png";
+  })();
+}
+RestaurantMapView.prototype.drawfilterMap = function(filnumArray, filname){
+  (function() {
+    var canvas = document.getElementById('map');
+    var context = canvas.getContext('2d');
+    var filArray = new Array(filnumArray.length);
+    for(var i=0; i<filnumArray.length; i++){
+      filArray[i] = new Image();
+      filArray[i].onload = function(){
+        context.drawImage(this, 0, 0);
+      };
+      filArray[i].src = "/assets/filter" + filname + filnumArray[i] + ".png";
+    }
+  })();
+}
+function SelectButtonChange(){
+  var seat_limit_array = <%= @seatlim %>;
+  var number = document.getElementById("person_num");
+  var choice;
+  var person_num = <%= @reservation.persons %>;
+  var choice_sum = 0;
+  var elements = document.getElementsByClassName("seat_select_button");
+  for(var i=0; i < elements.length; i++){
+    var options = elements[i].options;
+    for(var j=0; j < options.length; j++){
+      var option = options[j];
+      if(option.selected){
+         if(option.value != ""){
+            choice_sum += seat_limit_array[option.value];
+         }
+      }
+    }
+  }
+
+  number.innerHTML = person_num - choice_sum;
+  if(number.innerHTML < 0) number.innerHTML = 0;
+  if(number.innerHTML == 0) {
+    document.getElementById("submit").disabled = false;
+  }else{
+    document.getElementById("submit").disabled = true;
+  }
+}
+
+function Main(){
+  var map = new RestaurantMapView()
+  var person_num = <%= @reservation.persons %>;
+  map.drawBaseMap(function(){
+    var array = <%= @usedseats %>;
+    map.drawfilterMap(array, "used");
+  });
+
+  var select = document.getElementsByClassName("seat_select_button");
+  for(var i = 0; i < select.length; i++){
+    select[i].addEventListener("change",SelectButtonChange, false);
+  }
+}
+window.onload = Main
+</script>
+
+<%= form_for [:confirm, @reservation], method: :post do |form| %>
+<%= render "form2", form: form %>
+<p>あと<span id="person_num"><%= @reservation.persons %></span>人分の席を選んでください。</p>
+  <%= form.hidden_field :date, :value => @reservation.date %>
+  <%= form.hidden_field :time, :value => @reservation.time %>
+  <%= form.hidden_field :persons, :value => @reservation.persons %>
+  <%= form.hidden_field :course_id, :value => @reservation.course_id %>
+  <%= form.hidden_field :memorial_id, :value => @reservation.memorial_id %>
+  <%= form.hidden_field :message, :value => @reservation.message %>
+
+<%= form.submit "確認画面へ", :id => "submit", :disabled => true %>
+<% end %>

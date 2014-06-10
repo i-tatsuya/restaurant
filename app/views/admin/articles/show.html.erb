@@ -1,0 +1,12 @@
+<% @page_title = @article.title %>
+<%= link_to "記事一覧へ", admin_articles_path %> |
+<%= link_to "記事の編集", [:edit, :admin, @article] %> |
+<%= link_to "記事の削除", [:admin, @article], method: :delete,confirm: "本当に削除しますか?" %>
+
+<h1><%= @article.title %></h1>
+
+<%= simple_format(@article.contents) %>
+
+<p class="article_footer">
+<%= @article.start_date.strftime("%Y/%m/%d %H:%M") %></p>
+

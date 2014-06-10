@@ -1,0 +1,32 @@
+<table class= "attr">
+  <tr>
+    <th>氏名</th>
+    <td><%= @user.user_name %></td>
+  </tr>
+  <tr>
+    <th>生年月日</th>
+    <td><%= @user.birthday %></td>
+  </tr>
+  <tr>
+    <th>住所</th>
+    <td><%= @user.address %></td>
+  </tr>
+  <tr>
+    <th>電話番号</th>
+    <td><%= @user.phone_number %></td>
+  </tr>
+  <tr>
+    <th>E-mail</th>
+    <td><%= @user.mail_address %></td>
+  </tr>
+</table>
+<h2>現在の予約状況</h2>
+<% if @reservations %>
+<ul>
+<% @reservations.each do |resv| %>
+  <li><%= link_to "#{resv.date.strftime("%Y年%m月%d日")} #{resv.time == 0 ? "ランチ" : "ディナー"} #{resv.course.course_name}", resv %> </li>
+<% end %>
+</ul>
+<% else %>
+<p>現在予約を承っておりません</p>
+<% end %>

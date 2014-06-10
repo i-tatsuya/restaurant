@@ -1,0 +1,13 @@
+<% if flash.alert %>
+<p class="alert"><%= flash.alert %></p>
+<% end %>
+<%= form_tag :session do %>
+  ログインID:<%= text_field_tag "mail_address","",style: "width: 120px" %></br>
+  パスワード:<%= password_field_tag "password","",style: "width: 120px" %></br>
+  <%= link_to "新規登録の方","/users/new" %>
+  <input type="submit" value="ログイン">
+<%= hidden_field_tag "form", request.path %>
+<% end %>
+
+
+

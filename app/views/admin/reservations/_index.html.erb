@@ -1,0 +1,36 @@
+<% if @reservations.present? %>
+<table class="list">
+  <tr>
+    <th>詳細</th>
+    <th>日時</th>
+    <th>お名前</th>
+    <th>時間</th>
+    <th>人数</th>
+    <th>お席</th>
+    <th>備考の有無</th>
+    <th>操作</th>
+  </tr>
+  <% @reservations.each do |reservation| %>
+  <tr>
+    <td><%= link_to "詳細表示", [:admin, reservation] %></td>
+    <td><%= reservation.date.strftime("%Y-%m-%d") %></td>
+    <td><%= reservation.author.user_name %></td>
+    <td><%= reservation.time ? "ランチ" : "ディナー" %></td>
+    <td><%= reservation.persons %></td>
+    <td><%= reservation.seats.map { |seat|
+              seat.id
+            } %></td>
+    <td><%= reservation.message.present? ? "有" : "無" %></td>
+    <td>
+      <%= link_to "削除", [:admin, reservation], method: :delete,
+            confirm: "本当に削除しますか?" %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<% will_paginate @reservations %>
+
+<% else %>
+<p>予約がありません。</p>
+<% end %>
+

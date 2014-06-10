@@ -1,0 +1,20 @@
+<% @page_title = "お知らせ一覧" %>
+<h1><%= @page_title %></h1>
+<%= link_to "記事の新規作成", new_admin_article_path %>
+
+<% if @articles.present? %>
+  <% @articles.each do |article| %>
+<h2><%= link_to article.title, [:admin, article] %></h2>
+<p><%= truncate(article.contents, length: 80) %>
+<%= link_to "もっと読む", article %></p>
+<p class="article_footer">
+<%= article.start_date.strftime("%Y/%m/%d %H:%M") %>
+<%= link_to "編集", [:edit, :admin, article] %> |
+<%= link_to "削除", [:admin, article], method: :delete, confirm: "本当に削除しますか?" %></p>
+  <% end %>
+<%= will_paginate @articles %>
+
+<% else %>
+<p>ニュースがありません。</p>
+<% end %>
+

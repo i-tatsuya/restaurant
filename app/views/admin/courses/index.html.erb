@@ -1,0 +1,17 @@
+<% @page_title = "コース一覧" %>
+<h1><%= @page_title %></h1>
+
+<%= link_to "コースの新規作成", new_admin_course_path %>
+
+<div id="index">
+  <ul>
+<% @courses.each do |course| %>
+    <li><%= link_to "#{course.course_name}", [:admin, course] %></br>
+        お値段：<%= course.price %></br>
+        <%= link_to(course_image_tag(course), [:admin, course])  %></li>
+    <p>
+      <%= link_to "編集", [:edit, :admin, course] %> |
+      <%= link_to "削除", [:admin, course], method: :delete, confirm: "本当に削除しますか?" %></p>
+<% end %>
+  </ul>
+</div>

@@ -1,0 +1,26 @@
+<div id="logo">
+  <%= image_tag("logo.png",size: "297x100",alt: "MontBlanc") %>
+</div>
+<div id="navi">
+  <% if @current_user %>
+  <p class="user">
+    <%= link_to  "マイページ",:account %> |
+    <% if @current_user.administrator %>
+      <%= link_to "管理ページ", "/admin" %>  |
+    <% end %>
+    <%= link_to "ログアウト", :session, method: :delete, confirm: "ログアウトしますか?" %>
+  </p>
+  <% else %>
+  <%= render "shared/login_form" %>
+  <% end %>
+</div>
+<div class="menubar">
+  <%= image_tag("top.jpg",size: "720x352",alt: "header_img")%>
+  <ul class="wrapper">
+    <li><%= link_to "TOPページ",root_path %></li>
+    <li><%= link_to "店内紹介","/storemap" %></li>
+    <li><%= link_to "コース一覧", courses_path %></li>
+    <li><%= link_to "お知らせ", articles_path %></li>
+    <li><%= link_to "予約", new_reservation_path %></li>
+  </ul>
+</div>

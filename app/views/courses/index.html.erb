@@ -1,0 +1,11 @@
+<% @page_title = "コース一覧" %>
+<h1><%= @page_title %></h1>
+<div id="index">
+  <ul>
+<% @courses.each do |course| %>
+    <li><%= link_to "#{course.course_name}", course %></br>
+        お値段：<%= course.price %></br>
+        <%= link_to(course_image_tag(course), course)  %></li>
+<% end %>
+  </ul>
+</div>

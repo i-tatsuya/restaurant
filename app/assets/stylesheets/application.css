@@ -1,0 +1,164 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+/* ページ全体 */
+body {
+  background-image: url("/assets/background.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  color: black;
+  margin: 0; padding: 0;
+  font-family: Meiryo, sans-serif;
+}
+
+/* リンク */
+a {
+ text-decoration: none;
+}
+a:link { color: #963; }
+a:visited { color: #500; }
+a:hover { color: #f80; }
+a img { border: none; }
+
+/* ブロック要素 */
+p, h1, h2, h3, table, ul {
+  margin: 0 0 1em;
+}
+
+/* 画像 */
+img {
+  
+}
+
+/* テーブル */
+table {
+  
+}
+th {
+  background-color: #963;
+  padding: 4px;
+  font-weight: normal;
+}
+th a:link{ color: #fff; }
+th a:visited { color: #500; }
+th a:hover { color: #f80; }
+td {
+  background-color: #fec;
+  padding: 4px;
+}
+
+/* 全体の枠 */
+div#container {
+  background-color: white;
+  margin: 0 auto;
+  padding: 5px 15px;
+  width: 780px;
+}
+
+/* コンテンツの枠 */
+div#content {
+  float: left;
+  width: 780px;
+  padding: 10px 10px 10px 0;
+}
+#content h2 {
+  border-bottom: 2px solid #fe3;
+}
+#content table {
+  min-width: 500px;
+  margin: 10px auto;
+}
+
+/* お知らせ */
+div.article {
+
+}
+
+/* ヘッダー */
+div#logo {
+  float: left;
+  width: 500px;
+}
+div#navi {
+  float: right;
+  width: 280px;
+}
+
+/* メニューバー */
+div.menubar {
+  float: left;
+  width: 780px;
+  background-color: #fec;
+}
+.menubar img {
+  width: 780px;
+  height: 300px;
+}
+ul.wrapper {
+  list-style: none;
+}
+ul.wrapper li {
+  float: left;
+  width: auto;
+ 
+}
+ul.wrapper li a {
+  display: block;
+  padding: 8px 35px 8px 35px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 100%;
+}
+/* 索引 */
+div#index {
+  
+}
+#index li {
+  margin: 10px;
+}
+#index img {
+  width: 400px;
+  height: 200px;
+  vertical-align: top;
+  margin: 0px 10px;
+}
+
+/* フッター */
+div#footer {
+  background-color: #fec;
+  clear: both;
+  padding: 8px 0;
+  text-align: center;
+  font-size: 80%;
+}
+
+p.notice {
+  border: 1px solid blue;
+  padding: 3px;
+  background-color: #ccf;
+}
+
+/* エラー */
+div#error {
+  background-color: #ffc;
+  border: 4px solid #ff0;
+  padding: 3px 6px;
+  margin: 0 0 1em;
+}  
+#error h2 {
+  font-size: 90%;
+  color: black;
+  margin: 0 0 4px;
+  border: none;
+}

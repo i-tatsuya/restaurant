@@ -1,0 +1,12 @@
+<%= render "shared/errors", obj: @reservation %>
+
+  <% if @reservation.memorial_id != nil %>
+  記念日サービスの選択
+      <%= form.select :service_id, @reservation.memorial.services.map{|t| [t.service_name, t.id]},{:prompt => "選択してください"} %>
+  <% end %>
+  <div class="field">
+    <%= form.fields_for :selected_seats do |seats| %>
+        <%= render 'fields_selected_seat', {:f => seats} %>
+    <% end %>
+  <%= link_to_add_fields "席を追加する", form, :selected_seats %>
+  </div>

@@ -1,0 +1,11 @@
+<% @page_title = @course.course_name %>
+<h1><%= @page_title %></h1>
+
+<p><%= link_to "コース一覧", admin_courses_path %> |
+<%= link_to "編集", [:edit, :admin, @course] %> |
+<%= link_to "削除", [:admin, @course], method: :delete, confirm: "本当に削除しますか?" %></p>
+
+<%= course_image_tag @course %>
+<h3>お値段：<%= @course.price %></h3>
+<h3>ご紹介</h3>
+<p><%= @course.details %></p>

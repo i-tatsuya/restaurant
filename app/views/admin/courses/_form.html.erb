@@ -1,0 +1,34 @@
+<%= render "shared/errors", obj: @course %>
+
+<table class="attr">
+<%= form.fields_for :image do |imgf| %>
+  <tr>
+    <th>イメージ画像</th>
+    <td>
+      <%= imgf.file_field :uploaded_image %>
+      <% if !imgf.object.new_record? && imgf.object.errors.empty? %>
+      <div>
+        <%= course_image_tag @course, width: 60 %>
+        <%= imgf.check_box :_destroy %>
+        <%= imgf.label :_destroy %>
+        <%= imgf.hidden_field :id %>
+      </div>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
+
+  <tr>
+    <th><%= form.label :course_name %></th>
+    <td><%= form.text_field :course_name, size: 20 %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :details %></th>
+    <td><%= form.text_area :details, rows: 10, cols: 45 %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :price %></th>
+    <td><%= form.text_field :price, size: 10 %></td>
+  </tr>
+</table>
+
